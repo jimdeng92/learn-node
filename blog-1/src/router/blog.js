@@ -1,5 +1,5 @@
 const {SuccessModel, ErrorModel} =  require('../model/resModel')
-const {getList, getDetail} = require('../controller/blog')
+const {getList, getDetail, newBlog, updateBlog, deleteBlog} = require('../controller/blog')
 
 module.exports = (req, res) => {
   const method = req.method
@@ -26,22 +26,22 @@ module.exports = (req, res) => {
   
   // 新建一篇博客
   if (method === 'POST' && req.path === '/api/blog/new') {
-    return {
-      msg: 'new'
-    }
+    // req.body 包含 title, content
+    const data = newBlog(req.body)
+    return new SuccessModel(data, '新建博客成功！')
   }
   
   // 更新一篇博客
   if (method === 'POST' && req.path === '/api/blog/update') {
-    return {
-      msg: 'update'
-    }
+    // req.body 包含 id, title, content
+    const data = updateBlog(req.body)
+    return data ? new SuccessModel('更新成功！') : new ErrorModel('更新失败！')
   }
   
   // 删除一篇博客
   if (method === 'POST' && req.path === '/api/blog/del') {
-    return {
-      msg: 'del'
-    }
+    // req.body 包含 id
+    const data = deleteBlog(req.body)
+    return data ? new SuccessModel('删除成功！') : new ErrorModel('删除失败！')
   }
 }
