@@ -1,44 +1,55 @@
+const {exec} = require('../db/mysql')
+
 const getList = (author, keyword) => {
-  return [
-    {
-      id: 0,
-      title: '标题1',
-      content: '内容1',
-      createTime: 1606299896956,
-      author: 'jimdeng'
-    },
-    {
-      id: 1,
-      title: '标题2',
-      content: '内容2',
-      createTime: 1606396899756,
-      author: 'jimdeng'
-    }
-  ]
+  let sql = `select id, title, content, author, createTime from blogs where 1=1 `
+
+  if (author) {
+    sql += `and author='${author}'`
+  }
+  if (keyword) {
+    sql += `and keyword='${keyword}'`
+  }
+  sql += `order by createtime desc;`
+
+  return exec(sql) // promise
 }
 
 const getDetail = (id) => {
-  return {
-    id: 0,
-    title: '标题1',
-    content: '内容1',
-    createTime: 1606299896956,
-    author: 'jimdeng'
-  }
+  const sql = `select * from blogs where id='${id}'`
+  return exec(sql)
 }
 
 const newBlog = (blogData = {}) => {
-  return {
-    id: 3
-  }
+  const {
+    title,
+    content,
+    author
+  } = blogData
+  const createtime = Date.now()
+  // 必须使用小括号
+  const sql = `insert into blogs (title, content, createtime, author) values ('${title}', '${content}', '${createtime}', '${author}')`
+
+  return exec(sql)
 }
 
 const updateBlog = (blogData = {}) => {
-  return true
+  const {
+    title, content, id, author
+  } = blogData
+
+  const sql = `update blogs set title='${title}', content='${content}' where id='${id}' and author='${author}'`
+
+  return exec(sql)
 }
 
-const deleteBlog = (id) => {
-  return false
+const deleteBlog = (data) => {
+  const {
+    id, author
+  } = data
+
+  const sql = `delete from blogs where id='${id}' and author='${author}'`
+
+  return exec(sql)
 }
 
 module.exports = {

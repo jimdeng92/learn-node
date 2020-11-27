@@ -7,7 +7,10 @@ module.exports = (req, res) => {
   // 登录
   if (method === 'POST' && req.path === '/api/user/login') {
     // req.body 包含 username, password
-    const data = login(req.body)
-    return data ? new SuccessModel('登录成功！') : new ErrorModel('登录失败！')
+
+    return login(req.body).then(data => {
+      const d = data[0] || {}
+      return d.username ? new SuccessModel('登录成功！') : new ErrorModel('登录失败！')
+    })
   }
 }
