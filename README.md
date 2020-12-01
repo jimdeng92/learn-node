@@ -91,3 +91,47 @@ con.query(sql, (err, result) => {
   console.log(result)
 })
 ```
+
+
+## nginx 本地配置代理
+
+我们需要在本地同时启动前端页面和接口，但是由于系统限制无法在同一接口启用，因此需要使用 nginx 反向代理。
+
+前端页面可以使用 `http-server -p 8080` 启动，接口用 node 服务，接口为 4396。
+
+下载好 nginx 后打开安装目录下的 conf/nginx.conf 文件，做如下修改：
+
+```
+#user  nobody;
+# 工作的进程数
+worker_processes  1;
+
+# ...
+
+#location / {
+#    root   html;
+#    index  index.html index.htm;
+#}
+
+server {
+  # 要监听的端口
+  listen  80;
+
+  # 设置代理
+  location / {
+    proxy_pass http://localhost:8080;
+  }
+  location /api/ {
+    proxy_pass http://localhost:4396;
+    proxy_set_header Host $host;
+  }
+}
+
+# ...
+```
+
+意思就是将本地 8080 端口代理到 80，将本地 4396 端口下的 /api/ 代理到 80。
+
+修改成功后保存，在 nginx 安装目录执行 `./nginx.exe` 启动服务即可。
+
+浏览器中输入 localhost 应该可访问前端页面和调用接口了。
