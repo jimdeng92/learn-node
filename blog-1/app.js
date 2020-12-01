@@ -1,6 +1,7 @@
 const querystring = require('querystring')
 const handleBlogRouter = require('./src/router/blog')
 const handleUserRouter = require('./src/router/user')
+const {access} = require('./src/utils/log')
 
 // 设置cookie 过期时间
 const getCookieExpires = () => {
@@ -40,6 +41,10 @@ const getPostData = (req) => {
 }
 
 const serverHandle = (req, res) => {
+  // 写入访问日志
+  access(`${req.method} -- ${req.url} -- ${req.headers['user-agent']} -- ${Date.now()}`)
+
+
   // 设置返回格式 JSON
   res.setHeader('Content-type', 'application/json')
 

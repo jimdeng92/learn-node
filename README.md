@@ -6,9 +6,13 @@
 
 - blog-3 使用 `koa`
 
+## 工具
+
 `nodemon` 监测文件变化
 
 `cross-env` 设置环境变量
+
+使用 Linux 的 crontab 执行定时任务
 
 
 ## 常用 SQL 语句
