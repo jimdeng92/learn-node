@@ -61,7 +61,7 @@ const serverHandle = (req, res) => {
 
   // 解析 session
   let needSetCookie = false
-  let userId = req.cookie.userid
+  let userId = req.cookie.userid // 1606731937927_0.09917670995930838
   if (userId) {
     if (!SESSION_DATA[userId]) {
       SESSION_DATA[userId] = {}
