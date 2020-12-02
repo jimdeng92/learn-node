@@ -1,10 +1,10 @@
 # learn-node
 
-- blog-1 使用原生 `node`
+- blog-node 使用原生 `node`
 
-- blog-2 使用 `express`
+- blog-express 使用 `express`
 
-- blog-3 使用 `koa`
+- blog-koa2 使用 `koa`
 
 ## 工具
 

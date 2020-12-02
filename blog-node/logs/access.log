@@ -13,3 +13,6 @@ POST -- /api/user/login -- Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit
 POST -- /api/user/login -- Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36 -- 1606880386313
 POST -- /api/user/login -- Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36 -- 1606880400082
 GET -- /api/blog/list?isadmin=1 -- Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36 -- 1606880400319
+GET -- /api/blog/detail?id=4 -- Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36 -- 1606880757951
+GET -- /api/blog/detail?id=2 -- Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36 -- 1606880764431
+GET -- /api/blog/detail?id=4 -- Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36 -- 1606880769148
