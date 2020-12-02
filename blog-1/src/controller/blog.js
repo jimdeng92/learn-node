@@ -1,4 +1,5 @@
 const {exec} = require('../db/mysql')
+const xss = require('xss')
 
 const getList = (author, keyword) => {
   let sql = `select id, title, content, author, createTime from blogs where 1=1 `
@@ -20,11 +21,10 @@ const getDetail = (id) => {
 }
 
 const newBlog = (blogData = {}) => {
-  const {
-    title,
-    content,
-    author
-  } = blogData
+  // 防止 xss 攻击
+  const title = xss(blogData.title)
+  const content = xss(blogData.content)
+  const author = xss(blogData.author)
   const createtime = Date.now()
   // 必须使用小括号
   const sql = `insert into blogs (title, content, createtime, author) values ('${title}', '${content}', '${createtime}', '${author}')`
