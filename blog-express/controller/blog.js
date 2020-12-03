@@ -32,9 +32,9 @@ const newBlog = (blogData = {}) => {
   return exec(sql)
 }
 
-const updateBlog = (blogData = {}) => {
+const updateBlog = (id, blogData = {}) => {
   const {
-    title, content, id, author
+    title, content, author
   } = blogData
 
   const sql = `update blogs set title='${title}', content='${content}' where id='${id}' and author='${author}'`
@@ -42,10 +42,7 @@ const updateBlog = (blogData = {}) => {
   return exec(sql)
 }
 
-const deleteBlog = (data) => {
-  const {
-    id, author
-  } = data
+const deleteBlog = (id, author) => {
 
   const sql = `delete from blogs where id='${id}' and author='${author}'`
 

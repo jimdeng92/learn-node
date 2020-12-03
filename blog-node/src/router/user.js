@@ -23,7 +23,6 @@ module.exports = (req, res) => {
 
   // 登录验证
   // if (method === 'GET' && req.path === '/api/user/login-test') {
-  //   console.log(req.session)
   //   if (req.session.username) {
   //     return Promise.resolve(new SuccessModel())
   //   }
