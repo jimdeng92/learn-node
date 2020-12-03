@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const fs = require('fs')
 // 解析 cookie ，在路由中使用 req.cookies 访问
 var cookieParser = require('cookie-parser');
 // 记录日志
@@ -25,7 +26,22 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
+const ENV = process.env.NODE_ENV
+if (ENV !== 'production') {
+  app.use(logger('dev'));
+} else {
+  // 线上日志
+  const logFileName = path.join(__dirname, 'logs', 'access.log')
+  const writeStream = fs.createWriteStream(logFileName, {
+    flags: 'a'
+  })
+
+  app.use(logger('combined', {
+    stream: writeStream
+  }));
+}
+
+
 app.use(express.json()); // 处理 post (application/json)
 app.use(express.urlencoded({ extended: false })); // 处理 post (x-www-form-urlencoded)
 app.use(cookieParser());
