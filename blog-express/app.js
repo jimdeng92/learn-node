@@ -5,12 +5,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 // 记录日志
 var logger = require('morgan');
+// session
+const session = require('express-session')
+// 链接 redis
+const RedisStore = require('connect-redis')(session)
+const redisClient = require('./db/redis')
 
 // 路由
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const blogRouter = require('./routes/blog')
-const userRouter = require('./routes/user')
+const userRouter = require('./routes/user');
+const { RedisClient } = require('./db/redis');
 
 // 初始化
 var app = express();
@@ -24,6 +30,20 @@ app.use(express.json()); // 处理 post (application/json)
 app.use(express.urlencoded({ extended: false })); // 处理 post (x-www-form-urlencoded)
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); // 静态文件
+
+const sessionStore = new RedisStore({
+  client: redisClient
+})
+// 生成 session
+app.use(session({
+  secret: 'JimDeng92@gmail.com',
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000
+  },
+  store: sessionStore
+}))
 
 // 注册路由
 app.use('/', indexRouter);

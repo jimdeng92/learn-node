@@ -10,6 +10,7 @@ router.get('/list', function(req, res, next) {
   // 从 controller 获取数据
   // 返回的是 promise
   return getList(author, keyword).then(list => {
+    // console.log(list)
     // 通过模板类返回数据和提示语
     res.json(
       new SuccessModel(list, '数据请求成功！')
