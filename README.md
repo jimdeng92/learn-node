@@ -96,6 +96,11 @@ con.query(sql, (err, result) => {
 })
 ```
 
+## redis
+
+启动 redis：进入安装目录执行 `redis-server.exe`
+
+另外开启一个 cmd 窗口，执行 `redis-cli`
 
 ## nginx 本地配置代理
 
@@ -139,3 +144,23 @@ server {
 修改成功后保存，在 nginx 安装目录执行 `./nginx.exe` 启动服务即可。
 
 浏览器中输入 localhost 应该可访问前端页面和调用接口了。
+
+## pm2 
+
+常用命令
+
+pm2 start <appFile> 启动
+
+pm2 list 列表
+
+pm2 restart <appName>/<id> 重新启动
+
+pm2 stop <appName>/<id> 停止
+
+pm2 delete <appName>/<id> 删除
+
+pm2 info <appName>/<id> 进程信息
+
+pm2 log <appName>/<id> 进程日志
+
+pm2 monit <appName>/<id> 监视进程
