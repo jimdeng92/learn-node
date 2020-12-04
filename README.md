@@ -4,7 +4,7 @@
 
 - blog-express 使用 `express`
 
-- blog-koa2 使用 `koa`
+- blog-koa 使用 `koa`
 
 ## 工具
 
