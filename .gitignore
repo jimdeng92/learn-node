@@ -1,7 +1,6 @@
-blog-node/node_modules
-blog-express/node_modules
-blog-koa2/node_modules
+*/node_modules
 
 .git
+
 .vscode
 

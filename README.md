@@ -1,10 +1,16 @@
 # learn-node
 
+## TODO
+
+- [Buffer](http://nodejs.cn/learn/nodejs-buffers)
+- 模板语法 pug
+
+## 分类
+
 - blog-node 使用原生 `node`
-
 - blog-express 使用 `express`
-
 - ~~blog-koa 使用 `koa`~~
+- excel
 
 ## 工具
 
@@ -145,7 +151,7 @@ server {
 
 浏览器中输入 localhost 应该可访问前端页面和调用接口了。
 
-## pm2 
+## pm2
 
 常用命令
 

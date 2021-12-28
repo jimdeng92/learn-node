@@ -16,9 +16,11 @@ function createWriteStream(fileName) {
 }
 
 // 写访问日志
-const accessWriteStream = createWriteStream('access.log')
 function access(log) {
-  writeLog(accessWriteStream, log)
+  writeLog(
+    createWriteStream('access.log'),
+    log
+  )
 }
 
 

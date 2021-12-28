@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爬虫</title>
+</head>
+<body>
+  <script>
+    const body = document.querySelector('body')
+
+    fetch('/getFundRanking')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('error')
+        }
+        return res.json()
+      })
+      .then(data => {
+        if (data.code !== 200) {
+          throw new Error('error')
+        }
+        const container = document.createElement('div')
+        container.innerHTML = data.data
+        body.insertBefore(container, body.firstChild)
+      })
+  </script>
+</body>
+</html>

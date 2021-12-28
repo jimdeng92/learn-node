@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>解析excel</title>
+  <style>
+    p {
+      color: #888;
+      font-size: 12px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <p for="table">请上传 .xlsx/.xls 文件：</p>
+  <input type="file" accept=".xlsx" name="table">
+  <br />
+  <p>F12查看 <code>/uploadFile</code> 接口和控制台打印的表格信息</p>
+  <script>
+    const fileInp = document.querySelector('input[type="file"]')
+
+    fileInp.addEventListener('change', (e) => {
+
+      if (fileInp.files.length > 0) {
+        const file = fileInp.files[0]
+        let formData = new FormData()
+        formData.append('fileName', file)
+        formData.append('userId', 'p5x7')
+
+        fetch('/uploadFile', {
+          method: 'POST',
+          body: formData
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK')
+            }
+            return response.json()
+          })
+          .then(data => {
+            if (data.code !== 200) {
+              return
+            }
+            console.log(data.data)
+          })
+      }
+    })
+  </script>
+</body>
+</html>
